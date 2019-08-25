@@ -1,0 +1,32 @@
+.form {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.form-group input {
+  font-size: 16px;
+}
+
+.btn {
+  margin-top: 2rem;
+  border: none;
+  background: #3f51b5;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background: #3f51b9;
+}
+
+@media (max-width: 530px) {
+  .form {
+    width: 70%;
+  }
+}

@@ -1,0 +1,41 @@
+.BlogAdd {
+  width: 50%;
+  margin: 2rem auto;
+  text-align: left;
+  font-size: 22px;
+}
+
+.BlogAdd-form {
+}
+
+.form-group input {
+  font-size: 16px;
+}
+
+.form-group textarea {
+  display: block;
+  font-size: 16px;
+}
+
+.BlogAdd-form input[type="submit"] {
+  margin-top: 0;
+  font-size: 15px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+
+.form-footer > div {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 530px) {
+  .BlogAdd {
+    width: 70%;
+  }
+}
