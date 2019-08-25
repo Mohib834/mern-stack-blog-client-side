@@ -12,6 +12,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import axios from 'axios';
 
+const API_URL = 'https://mohib-blog-api.herokuapp.com/'
+
 //Theme modification 
 const theme = createMuiTheme({
   palette: {
@@ -47,7 +49,7 @@ class App extends Component {
   }
 
   getPublicBlogs() {
-    axios.get('http://localhost:3000/blog')
+    axios.get(`${API_URL}blog`)
       .then(response => {
         this.setState({ publicBlogs: response.data })
       })
@@ -55,7 +57,7 @@ class App extends Component {
   }
 
   getMyBlogs() {
-    axios.get('http://localhost:3000/blog/myblogs')
+    axios.get(`${API_URL}blog/myblogs`)
       .then(response => {
         this.setState({ myBlogs: response.data })
         console.log(response.data);
@@ -76,7 +78,7 @@ class App extends Component {
 
   async registerUser(data, callback) {
     try {
-      const response = await axios.post(`http://localhost:3000/register`, { data });
+      const response = await axios.post(`${API_URL}register`, { data });
       document.cookie = `token=${response.data.token};path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT`;
 
       this.getPublicBlogs();
@@ -94,7 +96,7 @@ class App extends Component {
 
   async loginUser(data, callback) {
     try {
-      const response = await axios.post(`http://localhost:3000/login`, { ...data });
+      const response = await axios.post(`${API_URL}login`, { ...data });
       document.cookie = `token=${response.data.token};path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT`;
 
       this.getPublicBlogs();
@@ -111,7 +113,7 @@ class App extends Component {
   }
 
   async logoutUser(callback) {
-    const response = await axios.post('http://localhost:3000/logout');
+    const response = await axios.post(`${API_URL}logout`);
     document.cookie = "token=;path=/;expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     localStorage.clear();
     this.setState(st => ({
@@ -125,7 +127,7 @@ class App extends Component {
 
   async createBlog(data, callback) {
     try {
-      const response = await axios.post(`http://localhost:3000/blog/new`, { ...data });
+      const response = await axios.post(`${API_URL}blog/new`, { ...data });
       callback(response);
 
       this.getPublicBlogs();
@@ -140,7 +142,7 @@ class App extends Component {
     this.setState(st => ({
       myBlogs: st.myBlogs.filter(blog => blog._id !== id),
     }))
-    axios.delete(`http://localhost:3000/blog/${id}`)
+    axios.delete(`${API_URL}blog/${id}`)
       .then(response => {
         console.log(response);
         this.getPublicBlogs();
@@ -149,7 +151,7 @@ class App extends Component {
   }
 
   async commentBlog(data, id, callback) {
-    const response = await axios.post(`http://localhost:3000/blog/${id}/comment`, {
+    const response = await axios.post(`${API_URL}blog/${id}/comment`, {
       ...data
     });
     // Updating a blog which have a new comment
