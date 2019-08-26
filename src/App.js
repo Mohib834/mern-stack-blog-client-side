@@ -55,31 +55,28 @@ class App extends Component {
   }
 
   getPublicBlogs() {
-    axios.get(`${API_URL}blog`)
-      .then(response => {
-        this.setState({ publicBlogs: response.data })
-      })
-      .catch(err => console.log(err))
+    this.setState({ loading: true }, () => {
+      axios.get(`${API_URL}blog`)
+        .then(response => {
+          this.setState({ publicBlogs: response.data, loading: false })
+        })
+        .catch(err => console.log(err))
+    })
   }
 
   getMyBlogs() {
-    axios.get(`${API_URL}blog/myblogs`, config(this.state.token))
-      .then(response => {
-        this.setState({ myBlogs: response.data })
-        console.log(response.data);
-      })
-      .catch(err => console.log(err))
+    this.setState({ loading: true }, () => {
+      axios.get(`${API_URL}blog/myblogs`, config(this.state.token))
+        .then(response => {
+          this.setState({ myBlogs: response.data, loading: false })
+        })
+        .catch(err => console.log(err))
+    })
   }
 
   componentDidMount() {
-    this.setState({ loading: true }, async () => {
-      await this.getPublicBlogs();
-      await this.getMyBlogs()
-
-      this.setState({
-        loading: false
-      })
-    })
+    this.getPublicBlogs();
+    this.getMyBlogs()
   }
 
   async registerUser(data, callback) {
