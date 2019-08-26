@@ -37,7 +37,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      isUserLoggedIn: document.cookie ? true : false,
+      isUserLoggedIn: localStorage.getItem('token') ? true : false,
       publicBlogs: [],
       myBlogs: [],
       loading: false,
