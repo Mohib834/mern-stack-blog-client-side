@@ -83,15 +83,15 @@ class App extends Component {
     try {
       const response = await axios.post(`${API_URL}register`, { data });
 
-      this.getPublicBlogs();
-      this.getMyBlogs();
-
-      localStorage.setItem('token', JSON.stringify(response.data.token));
-
       this.setState({
         isUserLoggedIn: true,
         token: response.data.token
       })
+
+      localStorage.setItem('token', JSON.stringify(response.data.token));
+
+      this.getPublicBlogs();
+      this.getMyBlogs();
 
       callback(response);
     } catch (err) {
@@ -103,15 +103,15 @@ class App extends Component {
     try {
       const response = await axios.post(`${API_URL}login`, { ...data });
 
-      this.getPublicBlogs();
-      this.getMyBlogs();
-
-      localStorage.setItem('token', JSON.stringify(response.data.token));
-
       this.setState(st => ({
         isUserLoggedIn: true,
         token: response.data.token
       }))
+
+      localStorage.setItem('token', JSON.stringify(response.data.token));
+
+      this.getPublicBlogs();
+      this.getMyBlogs();
 
       callback(response);
     } catch (err) {
