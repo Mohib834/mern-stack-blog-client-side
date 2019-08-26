@@ -148,12 +148,13 @@ class Blog extends Component {
                             {b.content}
                         </p>
                     </div>
-
-                    <Link to="/blog/new">
-                        <Fab color="primary" aria-label="add" className={classes.fab}>
-                            <AddIcon style={{ fontSize: '22px' }} />
-                        </Fab>
-                    </Link>
+                    {isUserLoggedIn && (
+                        <Link to="/blog/new">
+                            <Fab color="primary" aria-label="add" className={classes.fab}>
+                                <AddIcon style={{ fontSize: '22px' }} />
+                            </Fab>
+                        </Link>
+                    )}
                     <div className={classes.comments}>
                         Comments -
                          {comments.map((comment, idx) => (
