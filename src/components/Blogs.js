@@ -33,6 +33,7 @@ const styles = {
 }
 
 class Blogs extends Component {
+
     render() {
         const { classes, blogs, deleteBlog, isUserLoggedIn, areMyBlogs, loading } = this.props;
         const showBlogs = () => {

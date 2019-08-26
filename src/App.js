@@ -41,7 +41,7 @@ class App extends Component {
       publicBlogs: [],
       myBlogs: [],
       loading: false,
-      token: ''
+      token: JSON.parse(localStorage.getItem('token')) || '',
     }
 
     this.registerUser = this.registerUser.bind(this);
@@ -89,6 +89,8 @@ class App extends Component {
       this.getPublicBlogs();
       this.getMyBlogs();
 
+      localStorage.setItem('token', JSON.stringify(response.data.token));
+
       this.setState({
         isUserLoggedIn: true,
         token: response.data.token
@@ -106,6 +108,8 @@ class App extends Component {
 
       this.getPublicBlogs();
       this.getMyBlogs();
+
+      localStorage.setItem('token', JSON.stringify(response.data.token));
 
       this.setState(st => ({
         isUserLoggedIn: true,
@@ -125,6 +129,8 @@ class App extends Component {
       isUserLoggedIn: false,
       token: ''
     }))
+
+    localStorage.clear();
 
     callback(response);
   }
