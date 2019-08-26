@@ -3,9 +3,14 @@
   margin: 2rem auto;
   text-align: left;
   font-size: 22px;
+  position: relative;
 }
 
-.BlogAdd-form {
+.BlogAdd img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .form-group input {
