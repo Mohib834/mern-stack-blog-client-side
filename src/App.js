@@ -63,7 +63,7 @@ class App extends Component {
   }
 
   getMyBlogs() {
-    axios.get(`${API_URL}blog/myblogs`)
+    axios.get(`${API_URL}blog/myblogs`, config(this.state.token))
       .then(response => {
         this.setState({ myBlogs: response.data })
         console.log(response.data);
