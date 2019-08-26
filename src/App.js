@@ -26,11 +26,11 @@ const theme = createMuiTheme({
 
 //For protected routes
 axios.defaults.withCredentials = true;
-const config = {
+const config = token => ({
   headers: {
-    'Authorization': `Bearer ${this.state.token}`
+    'Authorization': `Bearer ${token}`
   }
-}
+})
 
 class App extends Component {
   constructor(props) {
@@ -119,7 +119,7 @@ class App extends Component {
   }
 
   async logoutUser(callback) {
-    const response = await axios.post(`${API_URL}logout`, null, config);
+    const response = await axios.post(`${API_URL}logout`, null, config(this.state.token));
     this.setState(st => ({
       user: {},
       isUserLoggedIn: false,
@@ -131,7 +131,7 @@ class App extends Component {
 
   async createBlog(data, callback) {
     try {
-      const response = await axios.post(`${API_URL}blog/new`, { ...data }, config);
+      const response = await axios.post(`${API_URL}blog/new`, { ...data }, config(this.state.token));
       callback(response);
 
       this.getPublicBlogs();
@@ -146,7 +146,7 @@ class App extends Component {
     this.setState(st => ({
       myBlogs: st.myBlogs.filter(blog => blog._id !== id),
     }))
-    axios.delete(`${API_URL}blog/${id}`, config)
+    axios.delete(`${API_URL}blog/${id}`, config(this.state.token))
       .then(response => {
         console.log(response);
         this.getPublicBlogs();
@@ -157,7 +157,7 @@ class App extends Component {
   async commentBlog(data, id, callback) {
     const response = await axios.post(`${API_URL}blog/${id}/comment`, {
       ...data
-    }, config);
+    }, config(this.state.token));
     // Updating a blog which have a new comment
     const updatedBlog = response.data;
     this.setState(st => ({
